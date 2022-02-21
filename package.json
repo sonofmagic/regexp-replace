@@ -1,7 +1,7 @@
 {
   "name": "regexp-replace",
-  "version": "1.0.1",
-  "description": "regexp-replace",
+  "version": "1.0.2",
+  "description": "base on RegExp#exec instead of String#replace",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
@@ -24,7 +24,12 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "keywords": [],
+  "keywords": [
+    "util",
+    "regexp-replace",
+    "regexp",
+    "replace"
+  ],
   "author": "SonOfMagic <qq1324318532@gmail.com>",
   "license": "MIT",
   "bugs": {

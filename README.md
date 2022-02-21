@@ -1,6 +1,6 @@
 # regexp-replace
 
-> base my RegExp#exec not String#replace.
+> base on RegExp#exec instead of String#replace.
 
 ## Usage
 
