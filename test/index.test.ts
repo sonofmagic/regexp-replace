@@ -15,16 +15,47 @@ describe('[Default]', () => {
     ).toBe(testCase)
   })
 
-  test('set empty class ', () => {
+  test('remove class ', () => {
     const testCase =
       '<view class="p-[20px] -mt-2 mb-[-20px]">p-[20px] -mt-2 mb-[-20px] margin的jit 不能这么写 -m-[20px]</view>'
     const regex =
       /(?:class|className)=(?:["']\W+\s*(?:\w+)\()?["']([^"]+)['"]/gim
     const result = replace(testCase, regex, (x, arr, idx, lastIdx, str) => {
+      expect(idx).toBe(6)
+      expect(lastIdx).toBe(39)
       return ''
     })
     expect(result).toBe(
       '<view >p-[20px] -mt-2 mb-[-20px] margin的jit 不能这么写 -m-[20px]</view>'
     )
+  })
+
+  test('replace class ', () => {
+    const testCase =
+      '<view class="p-[20px] -mt-2 mb-[-20px]">p-[20px] -mt-2 mb-[-20px] margin的jit 不能这么写 -m-[20px]</view>'
+    const regex =
+      /(?:class|className)=(?:["']\W+\s*(?:\w+)\()?["']([^"]+)['"]/gim
+    const result = replace(testCase, regex, (x, arr, idx, lastIdx, str) => {
+      return `class="${arr[1].toUpperCase()}"`
+    })
+    expect(result).toBe(
+      '<view class="P-[20PX] -MT-2 MB-[-20PX]">p-[20px] -mt-2 mb-[-20px] margin的jit 不能这么写 -m-[20px]</view>'
+    )
+  })
+
+  test('string replacement', () => {
+    const testCase = '<view class="p-[20px] -mt-2 mb-[-20px]">不能这么写</view>'
+    const regex =
+      /(?:class|className)=(?:["']\W+\s*(?:\w+)\()?["']([^"]+)['"]/gim
+    const result = replace(testCase, regex, '[placeholder]')
+    expect(result).toBe('<view [placeholder]>不能这么写</view>')
+  })
+
+  test('throw type error', () => {
+    const testCase = '<view class="p-[20px] -mt-2 mb-[-20px]">不能这么写</view>'
+    const regex =
+      /(?:class|className)=(?:["']\W+\s*(?:\w+)\()?["']([^"]+)['"]/gim
+    // @ts-ignore
+    expect(() => replace(testCase, regex, 123)).toThrow(TypeError)
   })
 })

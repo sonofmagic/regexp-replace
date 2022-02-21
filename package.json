@@ -1,6 +1,6 @@
 {
   "name": "regexp-replace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "regexp-replace",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

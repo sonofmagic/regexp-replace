@@ -1,16 +1,27 @@
-# npm-lib-template
+# regexp-replace
 
-本人用于编写的一个 `npm` 包的一个模板
+> base my RegExp#exec not String#replace.
 
-- 使用 `tsc` 或者 `rollup` 打包
-- 使用 `jest` 设置作为单元测试
-- 使用 `eslint` 来规范代码风格，默认风格为 `standard`
-- 输出 `dist` -> `cjs`,`esm` and `.d.ts`
+## Usage
 
-## scripts
+```ts
+const case = '<view class="p-[20px] -mt-2 mb-[-20px]">test case</view>'
+const regex = /(?:class|className)=(?:["']\W+\s*(?:\w+)\()?["']([^"]+)['"]/gim
+// remove class
+replace(case, regex, (match, arr, idx, lastIdx, str) => {
+  return ''
+})
 
-执行 `npm run init:rename`
- 
-作用为替换 `package.json` 中默认包含的所有名称为 `npm-lib-template` 的字段
+// sign
+function replace(str: string, pattern: RegExp, replacement: string | ((match: string, arr: RegExpExecArray, index: number, lastIndex: number, string: string) => string)): string;
 
-默认替换为新建代码仓库的文件夹名称！
+// params
+// match -> RegExp match string
+// arr -> RegExpExecArray
+// index -> RegExpExecArray#index
+// lastIndex -> RegExp#lastIndex
+// string -> orignal string
+
+```
+
+More Usages see [here](https://github.com/sonofmagic/regexp-replace/blob/main/test/index.test.ts)
