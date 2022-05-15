@@ -11,6 +11,7 @@ export default function replace (
         string: string
       ) => string)
 ) {
+  const ts = Date.now()
   const isString = typeof replacement === 'string'
   const isFn = typeof replacement === 'function'
   if (!isString && !isFn) {
@@ -31,5 +32,7 @@ export default function replace (
     p = pattern.lastIndex
   }
   res.push(str.slice(p))
-  return res.join('')
+  const result = res.join('')
+  console.debug(str, ' takes: ', Date.now() - ts)
+  return result
 }
